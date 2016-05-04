@@ -1,0 +1,1 @@
+VisTrails workflow files (.vt)
