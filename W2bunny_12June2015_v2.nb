@@ -3,19 +3,17 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[    254246,       5981]
-NotebookOptionsPosition[    245492,       5718]
-NotebookOutlinePosition[    245881,       5735]
-CellTagsIndexPosition[    245838,       5732]
+NotebookDataLength[    256415,       6045]
+NotebookOptionsPosition[    247671,       5784]
+NotebookOutlinePosition[    248064,       5801]
+CellTagsIndexPosition[    248021,       5798]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
-Cell["\<\
-W2_bunny_June12_v2.nb 
-(stepping was 0.5\[Micro]m, but program use 0.48\[Micro]m step2, \
-listGrating... needs to be changed)\
-\>", "Section",
+
+Cell[CellGroupData[{
+Cell["W2_bunny_June12_v2.nb ", "Section",
  CellChangeTimes->{{3.5054085872672462`*^9, 3.505408612829509*^9}, {
    3.505410310351451*^9, 3.505410328379615*^9}, {3.505474075433158*^9, 
    3.505474085474203*^9}, {3.5062589046288433`*^9, 3.506258959361998*^9}, {
@@ -40,7 +38,16 @@ listGrating... needs to be changed)\
    3.6502802512942343`*^9, 3.650280254364504*^9}, 3.651345164897313*^9, {
    3.6522044084402523`*^9, 3.6522044092522297`*^9}, {3.652204467300482*^9, 
    3.6522044728744707`*^9}, 3.652536223173424*^9, {3.6630915915042963`*^9, 
-   3.663091653614847*^9}, {3.6714623909324703`*^9, 3.6714624114103003`*^9}}],
+   3.663091653614847*^9}, {3.6714623909324703`*^9, 3.6714624114103003`*^9}, {
+   3.6762911089974194`*^9, 3.676291109331431*^9}}],
+
+Cell["\<\
+
+see elog:  \[NonBreakingSpace]Wed Jul 22 07:26:21 2015  for details about the \
+expt.  W2_bunny uses 0.50 micro steps.\
+\>", "Text",
+ CellChangeTimes->{{3.676291111451768*^9, 3.6762911410050287`*^9}}]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -486,7 +493,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.643014061690824*^9, 3.643014079903895*^9}, {
   3.643033013429309*^9, 3.643033069214209*^9}, {3.643033194749892*^9, 
   3.643033343655643*^9}}]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -1254,6 +1261,12 @@ Cell[BoxData[
           RowBox[{"testPoint", "[", 
            RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}]}], ";", 
       "\[IndentingNewLine]", 
+      RowBox[{"visibilityPercentTestPoint", " ", "=", "  ", 
+       RowBox[{"Round", "[", 
+        RowBox[{
+         RowBox[{"100", "*", 
+          RowBox[{"visibility", "/", "transmission"}]}], ",", "0.1"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"phi", "=", 
        RowBox[{"phiMatrix", "[", 
         RowBox[{"[", 
@@ -1278,29 +1291,44 @@ Cell[BoxData[
          RowBox[{"{", 
           RowBox[{"i", ",", 
            RowBox[{"Length", "[", "xExpt", "]"}]}], "}"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", "  ", 
+      "\[IndentingNewLine]", 
+      RowBox[{"sigma", "=", 
+       RowBox[{
+        RowBox[{"Sqrt", "[", "yExpt", "]"}], "//", "N"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"chi", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         FractionBox["1", 
+          RowBox[{"numberGratingSteps", "-", "1"}]], ")"}], 
+        RowBox[{"Total", "[", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           FractionBox[
+            RowBox[{"yExpt", "-", " ", "yCalc"}], "sigma"], ")"}], "2"], 
+         "]"}]}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"plotString", "=", 
        RowBox[{"\"\<transmission=\>\"", "<>", 
         RowBox[{"ToString", "[", "transmission", "]"}], "<>", "\"\<\\n\>\"", "<>",
          "\[IndentingNewLine]", "\"\<visibility=\>\"", "<>", 
-        RowBox[{"ToString", "[", "visibility", "]"}], "<>", "\"\<\\n\>\"", "<>",
-         "\[IndentingNewLine]", "\"\<phi=\>\"", "<>", 
-        RowBox[{"ToString", "[", "phi", "]"}]}]}], ";", "\[IndentingNewLine]", 
-      RowBox[{"gFitReference", " ", "=", 
+        RowBox[{"ToString", "[", "visibilityPercentTestPoint", "]"}], "<>", 
+        "\"\<% \\n\>\"", "<>", "\[IndentingNewLine]", "\"\<phi=\>\"", "<>", 
+        RowBox[{"ToString", "[", "phi", "]"}], "<>", "\"\< rad;   \>\"", "<>", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"Round", "[", 
+          RowBox[{"phi", "*", 
+           RowBox[{"180", "/", "Pi"}]}], "]"}], "]"}], "<>", 
+        "\"\<\[Degree]\\n\>\"", "<>", "\[IndentingNewLine]", 
+        "\"\< \!\(\*SuperscriptBox[SubscriptBox[\(\[Chi]\), \(v\)], \(2\)]\)=\
+\>\"", "<>", " ", 
+        RowBox[{"ToString", "[", "chi", "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"g1", "=", 
        RowBox[{"ListPlot", "[", 
         RowBox[{
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"Transpose", "[", 
-            RowBox[{"{", 
-             RowBox[{"xExpt", ",", "yExpt"}], "}"}], "]"}], ",", 
-           RowBox[{"Transpose", "[", 
-            RowBox[{"{", 
-             RowBox[{"xExpt", ",", "yCalc"}], "}"}], "]"}]}], "}"}], ",", 
-         RowBox[{"Joined", "\[Rule]", 
+         RowBox[{"Transpose", "[", 
           RowBox[{"{", 
-           RowBox[{"False", ",", "True"}], "}"}]}], ",", 
-         "\[IndentingNewLine]", 
+           RowBox[{"xExpt", ",", "yExpt"}], "}"}], "]"}], ",", 
+         RowBox[{"Joined", "\[Rule]", "False"}], ",", "\[IndentingNewLine]", 
          RowBox[{"Frame", "\[Rule]", "True"}], ",", 
          RowBox[{"FrameLabel", "\[Rule]", 
           RowBox[{"{", 
@@ -1321,8 +1349,28 @@ Cell[BoxData[
             ",", 
             RowBox[{"Scaled", "[", 
              RowBox[{"{", 
-              RowBox[{"0.4", ",", "0.85"}], "}"}], "]"}]}], "]"}]}], ",", 
+              RowBox[{"0.4", ",", "0.75"}], "}"}], "]"}]}], "]"}]}], ",", 
          RowBox[{"ImageSize", "\[Rule]", "300"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"g2", "=", " ", 
+       RowBox[{"Plot", "[", 
+        RowBox[{
+         RowBox[{"transmission", " ", "+", " ", 
+          RowBox[{"visibility", " ", 
+           RowBox[{"Sin", "[", 
+            RowBox[{
+             RowBox[{"2", " ", "\[Pi]", " ", 
+              RowBox[{"x", "/", "gratingPeriodMicrons"}]}], "+", " ", "phi"}],
+             " ", "]"}]}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", 
+           RowBox[{"Min", "[", "listGratingStepsMicrons", "]"}], ",", 
+           RowBox[{"Max", "[", "listGratingStepsMicrons", "]"}]}], "}"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gFitReference", " ", "=", 
+       RowBox[{"Show", "[", 
+        RowBox[{"{", 
+         RowBox[{"g1", ",", "g2"}], "}"}], "]"}]}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"gAllReference", " ", "=", " ", 
        RowBox[{"Grid", "[", 
@@ -1343,7 +1391,11 @@ Cell[BoxData[
    3.643051672787051*^9}, {3.643147433005711*^9, 3.643147463988842*^9}, {
    3.643235720427829*^9, 3.6432357211713543`*^9}, 3.6432357530420523`*^9, {
    3.6432359281198883`*^9, 3.643235948661955*^9}, {3.647467123117434*^9, 
-   3.64746712723796*^9}}],
+   3.64746712723796*^9}, {3.6762929497068253`*^9, 3.676292950057374*^9}, {
+   3.676292981002962*^9, 3.676292981427388*^9}, 3.676293028881014*^9, {
+   3.676293079376354*^9, 3.676293121396294*^9}, {3.676293166935812*^9, 
+   3.6762931788765163`*^9}, {3.676293423730908*^9, 3.676293439123247*^9}, 
+   3.676293530136982*^9}],
 
 Cell[BoxData[
  RowBox[{
@@ -2005,7 +2057,7 @@ Cell[BoxData[{
    3.6714659389424477`*^9, 3.671465978162683*^9}, {3.671466028010076*^9, 
    3.6714660341057863`*^9}}]
 }, Closed]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -2110,7 +2162,7 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{
       RowBox[{"(", 
-       RowBox[{"i", "-", "1"}], ")"}], "*", "0.48"}], ",", 
+       RowBox[{"i", "-", "1"}], ")"}], "*", "0.50"}], ",", 
      RowBox[{"{", 
       RowBox[{"i", ",", "1", ",", "12"}], "}"}]}], "]"}]}], 
   " "}], "\[IndentingNewLine]", 
@@ -2150,7 +2202,7 @@ Cell[BoxData[{
    3.648402753714714*^9}, 3.648487000012746*^9, {3.648487117161139*^9, 
    3.648487120832012*^9}, {3.648487177427369*^9, 3.648487180330043*^9}, {
    3.651518777585507*^9, 3.651518786439164*^9}, {3.6714652902123337`*^9, 
-   3.671465292004055*^9}}],
+   3.671465292004055*^9}, {3.676290972526576*^9, 3.676290972660659*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -2339,7 +2391,7 @@ Cell[BoxData[{
    3.642994640059691*^9, 3.6430147625809507`*^9, {3.643015065536385*^9, 
    3.643015080149454*^9}, {3.6430153704280567`*^9, 3.643015453595624*^9}, {
    3.64746503842805*^9, 3.6474650460122147`*^9}}]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2392,7 +2444,7 @@ Cell[BoxData[{
    3.648403171162732*^9, {3.6494424428497*^9, 3.649442443000424*^9}, {
    3.650280285542219*^9, 3.6502802857406673`*^9}, 3.651345273848752*^9, 
    3.671475410878282*^9, {3.671475788636075*^9, 3.671475789777769*^9}}]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2505,7 +2557,7 @@ Cell[BoxData[{
   "}"}], "\[IndentingNewLine]", "timeImage"}], "Input",
  CellChangeTimes->{{3.6473720679057093`*^9, 3.6473720682898912`*^9}, 
    3.647465759362228*^9}]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2579,7 +2631,7 @@ Cell[BoxData[{
  CellChangeTimes->{{3.643053376307428*^9, 3.6430533915754547`*^9}, {
   3.643053521388743*^9, 3.643053526155384*^9}, {3.643060859098448*^9, 
   3.643060890864382*^9}, {3.643061093186206*^9, 3.643061148264038*^9}}]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2657,11 +2709,13 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell["\<\
-3-6. calculate absorption, differential phase contrast, and dark-field\
+3-6. calculate absorption, differential phase contrast,  dark-field, \
+integrated linear diffusion coeff.\
 \>", "Subsection",
  CellChangeTimes->{{3.643052230514303*^9, 3.6430523559129753`*^9}, {
   3.6430523924760933`*^9, 3.643052405555376*^9}, {3.643052494008638*^9, 
-  3.643052505184188*^9}, {3.6702570638253107`*^9, 3.6702570650328007`*^9}}],
+  3.643052505184188*^9}, {3.6702570638253107`*^9, 3.6702570650328007`*^9}, {
+  3.67629240204841*^9, 3.676292404249042*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -2719,17 +2773,63 @@ Cell[BoxData[{
    RowBox[{"Mean", "[", 
     RowBox[{"Flatten", "[", "darkfield", "]"}], "]"}], ",", 
    RowBox[{"Max", "[", "darkfield", "]"}]}], "}"}]}], "Input",
- CellChangeTimes->{{3.643061001195939*^9, 3.643061009322452*^9}}]
+ CellChangeTimes->{{3.643061001195939*^9, 3.643061009322452*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ILDC", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"G2gratingPeriodMicrons", "/", 
+           RowBox[{"Flatten", "[", 
+            RowBox[{"Pi", "*", "distanceSampletoG2"}], "]"}]}], ")"}], "^", 
+         "2"}], "/", "2"}], ")"}]}], "*", 
+     RowBox[{"Log", "[", "darkfield", "]"}]}], " ", "//", "N"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Min", "[", "ILDC", "]"}], ",", 
+   RowBox[{"Mean", "[", 
+    RowBox[{"Flatten", "[", "ILDC", "]"}], "]"}], ",", 
+   RowBox[{"Max", "[", "ILDC", "]"}]}], "}"}]}], "Input"],
+
+Cell[TextData[{
+ "The reference for integrated linear diffusion coeffient is Phys. Med. Biol. \
+55 (2010) 5529\[Dash]5539\nM Bech, O Bunk, T Donath, R Feidenhans\
+\[CloseCurlyQuote]l, C David and F Pfeiffer, Quantitative x-ray dark-field \
+computed tomography\nSee equation 17\nILDC = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"-", 
+      SuperscriptBox[
+       SubscriptBox["p", "2"], "2"]}], 
+     RowBox[{"2", " ", 
+      SuperscriptBox["\[Pi]", "2"], 
+      SuperscriptBox["d", "2"]}]], 
+    RowBox[{"ln", "(", 
+     RowBox[{"dark", " ", "field"}], ")"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "\n"
+}], "Text",
+ CellChangeTimes->{{3.676292657065805*^9, 3.676292825551914*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["\<\
-3-7. plot absorption, differential phase contrast, and dark-field\
+3-7. plot absorption, differential phase contrast, dark-field, \
+visibilityPercent, ILDC\
 \>", "Subsection",
  CellChangeTimes->{{3.643052230514303*^9, 3.6430523559129753`*^9}, {
   3.6430523924760933`*^9, 3.643052405555376*^9}, {3.670257066705193*^9, 
-  3.670257068328642*^9}}],
+  3.670257068328642*^9}, {3.676292517334247*^9, 3.676292574167589*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -2750,13 +2850,13 @@ Cell[BoxData[{
  RowBox[{"gAbsDpcDF", "=", 
   RowBox[{"funcPlotAbsorptionDPCDarkField", "[", 
    RowBox[{
-   "plotLabel", ",", "absorption", ",", "differentialPhase", ",", 
-    "darkfield"}], "]"}]}]}], "Input",
+   "plotLabel", ",", "absorption", ",", "differentialPhase", ",", "ILDC"}], 
+   "]"}]}]}], "Input",
  CellChangeTimes->{{3.643099748871211*^9, 3.643099791897463*^9}, {
-  3.6433565869406548`*^9, 3.6433567151284924`*^9}, {3.643356843429031*^9, 
-  3.6433568618047028`*^9}, {3.649501350170074*^9, 3.64950138577673*^9}, {
-  3.6513460919857683`*^9, 3.651346104632182*^9}, {3.651427171400237*^9, 
-  3.651427199523233*^9}}],
+   3.6433565869406548`*^9, 3.6433567151284924`*^9}, {3.643356843429031*^9, 
+   3.6433568618047028`*^9}, {3.649501350170074*^9, 3.64950138577673*^9}, {
+   3.6513460919857683`*^9, 3.651346104632182*^9}, {3.651427171400237*^9, 
+   3.651427199523233*^9}, 3.676292448031086*^9}],
 
 Cell[BoxData[
  RowBox[{"Export", "[", 
@@ -2857,7 +2957,7 @@ Cell[BoxData[{
  CellChangeTimes->{{3.670588484992837*^9, 3.67058848499339*^9}, 
    3.6706767423327713`*^9, 3.671475707791707*^9}]
 }, Open  ]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -2936,11 +3036,13 @@ visibility and store HDF5, FITS\
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"funcFindReferenceTIFFfiles", "[", "pathTIFF", "]"}], ";", 
+  RowBox[{
+   RowBox[{"funcFindReferenceTIFFfiles", "[", "pathTIFF", "]"}], ";"}], 
   RowBox[{"(*", 
    RowBox[{
    "need", " ", "call", " ", "variables", " ", "from", " ", "functions"}], 
-   "*)"}], "\[IndentingNewLine]", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{"funcFindSampleTIFFfiles", "[", "pathTIFF", "]"}], ";"}], "\n", 
  RowBox[{
   RowBox[{"funcFindReferenceGroups", "[", "]"}], ";"}], "\n", 
@@ -3216,7 +3318,7 @@ Cell[BoxData[{
    3.6706767423327713`*^9, 3.671475683085507*^9, {3.671476443642498*^9, 
    3.671476464101886*^9}, 3.671478744435066*^9}]
 }, Open  ]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -3241,8 +3343,6 @@ Cell["Step 5:  Centering", "Section",
    3.64334856224571*^9, 3.643348574852208*^9}, {3.6475317579170513`*^9, 
    3.6475317855798883`*^9}, {3.6476768069750853`*^9, 3.647676827883218*^9}, 
    3.647762567995881*^9, {3.671479377426199*^9, 3.671479385128364*^9}}],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{"pathRoot", " ", "=", " ", 
@@ -3271,11 +3371,6 @@ Cell[BoxData[{
    3.671479613030121*^9}, {3.671522218555141*^9, 3.671522234961755*^9}, {
    3.671522298361421*^9, 3.6715223017777843`*^9}}],
 
-Cell[BoxData["\<\"/Volumes/Backup/BunnyData_MeleteMirror/feetdown_Hgrating/\"\
-\>"], "Output",
- CellChangeTimes->{3.672936891002179*^9, 3.6729370199413643`*^9}]
-}, Open  ]],
-
 Cell[CellGroupData[{
 
 Cell["5-1  Read 0 to 180-\[CapitalDelta]\[Theta] absorption FITS and make \
@@ -3290,8 +3385,6 @@ allSinograms ", "Subsection",
    3.671479544314344*^9, 3.671479547960895*^9}, 3.671539341123752*^9, {
    3.671702968266173*^9, 3.671702974494631*^9}, {3.672937032646791*^9, 
    3.672937032782045*^9}}],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
@@ -3342,33 +3435,6 @@ Cell[BoxData[{
    3.671234468454912*^9}, {3.671234696087525*^9, 3.671234696438366*^9}, {
    3.6714795846686163`*^9, 3.671479642964539*^9}, {3.6715307086980333`*^9, 
    3.671530709074697*^9}, {3.6717030477291203`*^9, 3.671703096547727*^9}}],
-
-Cell[BoxData["96"], "Output",
- CellChangeTimes->{3.672937038820175*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-  "0.`", ",", "2.`", ",", "4.`", ",", "6.`", ",", "8.`", ",", "10.`", ",", 
-   "12.`", ",", "14.`", ",", "16.`", ",", "18.`", ",", "20.`", ",", "22.`", 
-   ",", "24.`", ",", "26.`", ",", "28.`", ",", "30.`", ",", "32.`", ",", 
-   "34.`", ",", "36.`", ",", "38.`", ",", "40.`", ",", "42.`", ",", "44.`", 
-   ",", "46.`", ",", "48.`", ",", "50.`", ",", "52.`", ",", "54.`", ",", 
-   "56.`", ",", "58.`", ",", "60.`", ",", "62.`", ",", "64.`", ",", "66.`", 
-   ",", "68.`", ",", "70.`", ",", "72.`", ",", "74.`", ",", "76.`", ",", 
-   "78.`", ",", "80.`", ",", "82.`", ",", "84.`", ",", "86.`", ",", "88.`", 
-   ",", "90.`", ",", "92.`", ",", "94.`", ",", "96.`", ",", "98.`", ",", 
-   "100.`", ",", "102.`", ",", "104.`", ",", "106.`", ",", "108.`", ",", 
-   "110.`", ",", "112.`", ",", "114.`", ",", "116.`", ",", "118.`", ",", 
-   "120.`", ",", "122.`", ",", "124.`", ",", "126.`", ",", "128.`", ",", 
-   "130.`", ",", "132.`", ",", "134.`", ",", "136.`", ",", "138.`", ",", 
-   "140.`", ",", "142.`", ",", "144.`", ",", "146.`", ",", "148.`", ",", 
-   "150.`", ",", "152.`", ",", "154.`", ",", "156.`", ",", "158.`", ",", 
-   "160.`", ",", "162.`", ",", "164.`", ",", "166.`", ",", "168.`", ",", 
-   "170.`", ",", "172.`", ",", "174.`", ",", "176.`", ",", "178.`"}], 
-  "}"}]], "Output",
- CellChangeTimes->{3.672937038828199*^9}]
-}, Open  ]],
 
 Cell[BoxData[
  RowBox[{"(*", 
@@ -5716,8 +5782,8 @@ Cell[BoxData[{
 }, Closed]]
 }, Closed]]
 },
-WindowSize->{1100, 850},
-WindowMargins->{{21, Automatic}, {Automatic, 0}},
+WindowSize->{1184, 812},
+WindowMargins->{{-1632, Automatic}, {Automatic, 43}},
 Magnification:>1.25 Inherited,
 FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
 2016)",
@@ -5734,246 +5800,244 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[400, 13, 1996, 29, 169, "Section"],
 Cell[CellGroupData[{
-Cell[2421, 46, 1001, 13, 62, "Section"],
-Cell[3425, 61, 408, 7, 71, "Input"],
-Cell[CellGroupData[{
-Cell[3858, 72, 288, 6, 67, "Subsection"],
-Cell[4149, 80, 943, 17, 195, "Text"],
-Cell[5095, 99, 3386, 83, 438, "Input"],
-Cell[8484, 184, 3326, 76, 386, "Input"],
-Cell[11813, 262, 2238, 52, 307, "Input"],
-Cell[14054, 316, 2228, 55, 255, "Input"],
-Cell[16285, 373, 4788, 114, 491, "Input"]
+Cell[422, 15, 1937, 26, 80, "Section"],
+Cell[2362, 43, 211, 5, 61, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[21110, 492, 266, 3, 67, "Subsection"],
-Cell[21379, 497, 2975, 70, 202, "Input"],
-Cell[24357, 569, 2835, 71, 253, "Input"],
-Cell[27195, 642, 2043, 48, 176, "Input"],
-Cell[29241, 692, 1873, 44, 280, "Input"],
-Cell[31117, 738, 2708, 64, 227, "Input"],
-Cell[33828, 804, 2833, 68, 383, "Input"],
-Cell[36664, 874, 4113, 100, 566, "Input"]
+Cell[2610, 53, 1001, 13, 80, "Section"],
+Cell[3614, 68, 408, 7, 57, "Input"],
+Cell[CellGroupData[{
+Cell[4047, 79, 288, 6, 54, "Subsection"],
+Cell[4338, 87, 943, 17, 156, "Text"],
+Cell[5284, 106, 3386, 83, 351, "Input"],
+Cell[8673, 191, 3326, 76, 309, "Input"],
+Cell[12002, 269, 2238, 52, 246, "Input"],
+Cell[14243, 323, 2228, 55, 204, "Input"],
+Cell[16474, 380, 4788, 114, 414, "Input"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[40814, 979, 354, 6, 53, "Subsection"],
-Cell[41171, 987, 2584, 62, 253, "Input"],
-Cell[43758, 1051, 2695, 57, 280, "Input"]
+Cell[21299, 499, 266, 3, 43, "Subsection"],
+Cell[21568, 504, 2975, 70, 315, "Input"],
+Cell[24546, 576, 2835, 71, 395, "Input"],
+Cell[27384, 649, 2043, 48, 275, "Input"],
+Cell[29430, 699, 1873, 44, 437, "Input"],
+Cell[31306, 745, 2708, 64, 353, "Input"],
+Cell[34017, 811, 2833, 68, 597, "Input"],
+Cell[36853, 881, 4113, 100, 883, "Input"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[46490, 1113, 374, 5, 53, "Subsection"],
-Cell[46867, 1120, 9949, 225, 1008, "Input"],
-Cell[56819, 1347, 12423, 297, 1165, "Input"]
+Cell[41003, 986, 354, 6, 43, "Subsection"],
+Cell[41360, 994, 2584, 62, 395, "Input"],
+Cell[43947, 1058, 2695, 57, 437, "Input"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[69279, 1649, 405, 5, 53, "Subsection"],
-Cell[69687, 1656, 2298, 55, 255, "Input"],
-Cell[71988, 1713, 3574, 88, 386, "Input"],
-Cell[75565, 1803, 2826, 72, 360, "Input"],
-Cell[78394, 1877, 1065, 28, 176, "Input"],
-Cell[79462, 1907, 2441, 57, 281, "Input"]
+Cell[46679, 1120, 374, 5, 43, "Subsection"],
+Cell[47056, 1127, 11956, 270, 1043, "Input"],
+Cell[59015, 1399, 12423, 297, 981, "Input"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[81940, 1969, 248, 3, 53, "Subsection"],
-Cell[82191, 1974, 1805, 31, 280, "Input"]
-}, Closed]]
+Cell[71475, 1701, 405, 5, 43, "Subsection"],
+Cell[71883, 1708, 2298, 55, 397, "Input"],
+Cell[74184, 1765, 3574, 88, 602, "Input"],
+Cell[77761, 1855, 2826, 72, 562, "Input"],
+Cell[80590, 1929, 1065, 28, 275, "Input"],
+Cell[81658, 1959, 2441, 57, 438, "Input"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[84045, 2011, 1088, 16, 107, "Section"],
-Cell[85136, 2029, 450, 8, 57, "Input"],
-Cell[85589, 2039, 2029, 40, 162, "Input"],
-Cell[87621, 2081, 3015, 71, 162, "Input"],
-Cell[90639, 2154, 3615, 78, 351, "Input"],
-Cell[94257, 2234, 399, 9, 57, "Input"],
-Cell[CellGroupData[{
-Cell[94681, 2247, 299, 4, 54, "Subsection"],
-Cell[94983, 2253, 1099, 20, 141, "Input"],
-Cell[96085, 2275, 142, 2, 35, "Input"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[96276, 2283, 1253, 18, 62, "Section"],
-Cell[97532, 2303, 484, 10, 78, "Input"],
-Cell[CellGroupData[{
-Cell[98041, 2317, 187, 2, 54, "Subsection"],
-Cell[98231, 2321, 1040, 19, 78, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[99308, 2345, 197, 3, 54, "Subsection"],
-Cell[99508, 2350, 533, 13, 99, "Input"],
-Cell[100044, 2365, 1823, 28, 78, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[101904, 2398, 221, 4, 54, "Subsection"],
-Cell[102128, 2404, 2149, 53, 246, "Input"],
-Cell[104280, 2459, 1783, 47, 246, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[106100, 2511, 341, 6, 67, "Subsection"],
-Cell[106444, 2519, 2066, 61, 307, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[108547, 2585, 216, 4, 54, "Subsection"],
-Cell[108766, 2591, 1496, 39, 141, "Input"],
-Cell[110265, 2632, 146, 2, 36, "Input"],
-Cell[110414, 2636, 497, 9, 57, "Input"],
-Cell[110914, 2647, 316, 6, 36, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[111267, 2658, 318, 5, 54, "Subsection"],
-Cell[111588, 2665, 598, 15, 83, "Input"],
-Cell[112189, 2682, 1000, 24, 99, "Input"],
-Cell[113192, 2708, 535, 13, 87, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[113764, 2726, 263, 5, 54, "Subsection"],
-Cell[114030, 2733, 1001, 25, 78, "Input"],
-Cell[115034, 2760, 339, 7, 36, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[115410, 2772, 304, 4, 54, "Subsection"],
-Cell[115717, 2778, 1992, 50, 202, "Input"]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[117746, 2833, 299, 4, 43, "Subsection"],
-Cell[118048, 2839, 914, 18, 141, "Input"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[119011, 2863, 1329, 17, 62, "Section"],
-Cell[120343, 2882, 644, 14, 99, "Input"],
-Cell[CellGroupData[{
-Cell[121012, 2900, 187, 2, 54, "Subsection"],
-Cell[121202, 2904, 1040, 19, 78, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[122279, 2928, 347, 6, 85, "Subsection"],
-Cell[122629, 2936, 550, 13, 99, "Input"],
-Cell[123182, 2951, 42, 0, 36, "Input"],
-Cell[123227, 2953, 12056, 243, 1236, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[135320, 3201, 321, 4, 54, "Subsection"],
-Cell[135644, 3207, 437, 9, 57, "Input"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[136130, 3222, 1515, 20, 62, "Section"],
-Cell[CellGroupData[{
-Cell[137670, 3246, 1073, 25, 141, "Input"],
-Cell[138746, 3273, 160, 2, 36, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[138943, 3280, 783, 11, 54, "Subsection"],
-Cell[CellGroupData[{
-Cell[139751, 3295, 2161, 48, 120, "Input"],
-Cell[141915, 3345, 71, 1, 35, "Output"],
-Cell[141989, 3348, 1370, 21, 120, "Output"]
-}, Open  ]],
-Cell[143374, 3372, 1063, 26, 162, "Input"],
-Cell[144440, 3400, 2192, 52, 183, "Input"],
-Cell[146635, 3454, 4315, 98, 330, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[150987, 3557, 710, 9, 54, "Subsection"],
-Cell[151700, 3568, 1792, 45, 150, "Input"],
-Cell[153495, 3615, 2443, 57, 253, "Input"]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[155975, 3677, 761, 10, 43, "Subsection"],
-Cell[156739, 3689, 196, 5, 36, "Input"],
-Cell[156938, 3696, 1129, 25, 141, "Input"],
-Cell[158070, 3723, 2835, 64, 225, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[160942, 3792, 349, 5, 54, "Subsection"],
-Cell[161294, 3799, 650, 13, 78, "Input"]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[161993, 3818, 1534, 22, 125, "Section"],
-Cell[163530, 3842, 730, 18, 141, "Input"],
-Cell[CellGroupData[{
-Cell[164285, 3864, 1032, 16, 54, "Subsection"],
-Cell[165320, 3882, 530, 13, 78, "Input"],
-Cell[165853, 3897, 972, 26, 99, "Input"],
-Cell[166828, 3925, 943, 19, 78, "Input"],
-Cell[167774, 3946, 3318, 80, 393, "Input"],
-Cell[171095, 4028, 983, 23, 150, "Input"],
-Cell[172081, 4053, 6169, 148, 438, "Input"]
-}, Open  ]],
-Cell[178265, 4204, 1732, 23, 67, "Subsection"],
-Cell[CellGroupData[{
-Cell[180022, 4231, 1787, 25, 92, "Subsection"],
-Cell[181812, 4258, 110, 1, 45, "Input"],
-Cell[181925, 4261, 233, 4, 45, "Input"],
-Cell[182161, 4267, 7737, 175, 990, "Input"]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[189935, 4447, 1939, 27, 92, "Subsection"],
-Cell[191877, 4476, 4806, 118, 727, "Input"]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[196720, 4599, 1931, 27, 92, "Subsection"],
-Cell[198654, 4628, 4873, 118, 727, "Input"]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[203564, 4751, 2038, 29, 92, "Subsection"],
-Cell[205605, 4782, 4992, 119, 727, "Input"]
+Cell[84136, 2021, 248, 3, 43, "Subsection"],
+Cell[84387, 2026, 1805, 31, 437, "Input"]
 }, Closed]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[210646, 4907, 1436, 19, 100, "Section"],
-Cell[212085, 4928, 143, 3, 233, "Input"],
+Cell[86241, 2063, 1088, 16, 80, "Section"],
+Cell[87332, 2081, 450, 8, 57, "Input"],
+Cell[87785, 2091, 2029, 40, 162, "Input"],
+Cell[89817, 2133, 3061, 71, 162, "Input"],
+Cell[92881, 2206, 3615, 78, 351, "Input"],
+Cell[96499, 2286, 399, 9, 57, "Input"],
 Cell[CellGroupData[{
-Cell[212253, 4935, 97, 1, 357, "Subsection"],
-Cell[212353, 4938, 983, 23, 857, "Input"],
-Cell[213339, 4963, 1207, 20, 393, "Input"],
-Cell[214549, 4985, 916, 25, 547, "Input"],
-Cell[215468, 5012, 541, 9, 233, "Input"],
-Cell[216012, 5023, 2122, 44, 852, "Input"],
-Cell[218137, 5069, 1279, 28, 852, "Input"],
-Cell[219419, 5099, 247, 5, 245, "Input"],
-Cell[219669, 5106, 1093, 24, 1012, "Input"],
-Cell[220765, 5132, 461, 12, 400, "Input"],
-Cell[221229, 5146, 500, 7, 697, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[221766, 5158, 145, 2, 760, "Subsection"],
-Cell[221914, 5162, 693, 17, 1707, "Input"],
-Cell[222610, 5181, 41, 0, 506, "Input"],
-Cell[222654, 5183, 1061, 24, 1707, "Input"],
-Cell[223718, 5209, 41, 0, 506, "Input"],
-Cell[223762, 5211, 569, 10, 506, "Input"],
-Cell[224334, 5223, 198, 3, 506, "Input"],
-Cell[224535, 5228, 585, 11, 1237, "Text"],
-Cell[225123, 5241, 3190, 63, 1996, "Input"],
-Cell[228316, 5306, 1604, 37, 1996, "Input"],
-Cell[229923, 5345, 244, 5, 520, "Input"],
-Cell[230170, 5352, 910, 21, 1996, "Input"],
-Cell[231083, 5375, 339, 5, 810, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[231459, 5385, 357, 6, 760, "Subsection"],
-Cell[231819, 5393, 329, 7, 145228, "Text"],
-Cell[232151, 5402, 918, 21, 234287, "Input"],
-Cell[233072, 5425, 2254, 57, 437872, "Input"],
-Cell[235329, 5484, 1775, 37, 234287, "Input"],
-Cell[237107, 5523, 260, 6, 85922, "Input"]
+Cell[96923, 2299, 299, 4, 54, "Subsection"],
+Cell[97225, 2305, 1099, 20, 141, "Input"],
+Cell[98327, 2327, 142, 2, 35, "Input"]
+}, Open  ]]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[237404, 5534, 187, 3, 600, "Subsection"],
-Cell[237594, 5539, 693, 17, 287108, "Input"],
-Cell[238290, 5558, 1076, 25, 287108, "Input"],
-Cell[239369, 5585, 603, 10, 85922, "Input"],
-Cell[239975, 5597, 215, 3, 85922, "Input"],
-Cell[240193, 5602, 585, 11, 202688, "Text"],
-Cell[240781, 5615, 3079, 59, 338203, "Input"],
-Cell[243863, 5676, 307, 6, 85922, "Input"],
-Cell[244173, 5684, 909, 22, 338203, "Input"],
-Cell[245085, 5708, 379, 6, 135126, "Input"]
+Cell[98518, 2335, 1253, 18, 62, "Section"],
+Cell[99774, 2355, 484, 10, 78, "Input"],
+Cell[CellGroupData[{
+Cell[100283, 2369, 187, 2, 54, "Subsection"],
+Cell[100473, 2373, 1040, 19, 78, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[101550, 2397, 197, 3, 43, "Subsection"],
+Cell[101750, 2402, 533, 13, 99, "Input"],
+Cell[102286, 2417, 1823, 28, 78, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[104146, 2450, 221, 4, 43, "Subsection"],
+Cell[104370, 2456, 2149, 53, 246, "Input"],
+Cell[106522, 2511, 1783, 47, 246, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[108342, 2563, 341, 6, 43, "Subsection"],
+Cell[108686, 2571, 2066, 61, 246, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[110789, 2637, 216, 4, 43, "Subsection"],
+Cell[111008, 2643, 1496, 39, 141, "Input"],
+Cell[112507, 2684, 146, 2, 36, "Input"],
+Cell[112656, 2688, 497, 9, 57, "Input"],
+Cell[113156, 2699, 316, 6, 36, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[113509, 2710, 401, 7, 54, "Subsection"],
+Cell[113913, 2719, 598, 15, 83, "Input"],
+Cell[114514, 2736, 1000, 24, 99, "Input"],
+Cell[115517, 2762, 535, 13, 87, "Input"],
+Cell[116055, 2777, 684, 21, 57, "Input"],
+Cell[116742, 2800, 727, 20, 150, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[117506, 2825, 332, 6, 54, "Subsection"],
+Cell[117841, 2833, 1021, 25, 78, "Input"],
+Cell[118865, 2860, 339, 7, 36, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[119241, 2872, 304, 4, 54, "Subsection"],
+Cell[119548, 2878, 1992, 50, 315, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[121577, 2933, 299, 4, 43, "Subsection"],
+Cell[121879, 2939, 914, 18, 141, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[122842, 2963, 1329, 17, 80, "Section"],
+Cell[124174, 2982, 644, 14, 99, "Input"],
+Cell[CellGroupData[{
+Cell[124843, 3000, 187, 2, 54, "Subsection"],
+Cell[125033, 3004, 1040, 19, 78, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[126110, 3028, 347, 6, 85, "Subsection"],
+Cell[126460, 3036, 576, 15, 99, "Input"],
+Cell[127039, 3053, 42, 0, 36, "Input"],
+Cell[127084, 3055, 12056, 243, 1278, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[139177, 3303, 321, 4, 54, "Subsection"],
+Cell[139501, 3309, 437, 9, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[139987, 3324, 1515, 20, 80, "Section"],
+Cell[141505, 3346, 1073, 25, 141, "Input"],
+Cell[CellGroupData[{
+Cell[142603, 3375, 783, 11, 54, "Subsection"],
+Cell[143389, 3388, 2161, 48, 120, "Input"],
+Cell[145553, 3438, 1063, 26, 162, "Input"],
+Cell[146619, 3466, 2192, 52, 183, "Input"],
+Cell[148814, 3520, 4315, 98, 515, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[153166, 3623, 710, 9, 83, "Subsection"],
+Cell[153879, 3634, 1792, 45, 233, "Input"],
+Cell[155674, 3681, 2443, 57, 395, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[158154, 3743, 761, 10, 66, "Subsection"],
+Cell[158918, 3755, 196, 5, 56, "Input"],
+Cell[159117, 3762, 1129, 25, 220, "Input"],
+Cell[160249, 3789, 2835, 64, 351, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[163121, 3858, 349, 5, 83, "Subsection"],
+Cell[163473, 3865, 650, 13, 121, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[164172, 3884, 1534, 22, 195, "Section"],
+Cell[165709, 3908, 730, 18, 220, "Input"],
+Cell[CellGroupData[{
+Cell[166464, 3930, 1032, 16, 83, "Subsection"],
+Cell[167499, 3948, 530, 13, 121, "Input"],
+Cell[168032, 3963, 972, 26, 153, "Input"],
+Cell[169007, 3991, 943, 19, 121, "Input"],
+Cell[169953, 4012, 3318, 80, 613, "Input"],
+Cell[173274, 4094, 983, 23, 233, "Input"],
+Cell[174260, 4119, 6169, 148, 683, "Input"]
+}, Open  ]],
+Cell[180444, 4270, 1732, 23, 103, "Subsection"],
+Cell[CellGroupData[{
+Cell[182201, 4297, 1787, 25, 143, "Subsection"],
+Cell[183991, 4324, 110, 1, 70, "Input"],
+Cell[184104, 4327, 233, 4, 70, "Input"],
+Cell[184340, 4333, 7737, 175, 1546, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[192114, 4513, 1939, 27, 143, "Subsection"],
+Cell[194056, 4542, 4806, 118, 1135, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[198899, 4665, 1931, 27, 143, "Subsection"],
+Cell[200833, 4694, 4873, 118, 1135, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[205743, 4817, 2038, 29, 143, "Subsection"],
+Cell[207784, 4848, 4992, 119, 1135, "Input"]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[212825, 4973, 1436, 19, 156, "Section"],
+Cell[214264, 4994, 143, 3, 363, "Input"],
+Cell[CellGroupData[{
+Cell[214432, 5001, 97, 1, 557, "Subsection"],
+Cell[214532, 5004, 983, 23, 1338, "Input"],
+Cell[215518, 5029, 1207, 20, 613, "Input"],
+Cell[216728, 5051, 916, 25, 853, "Input"],
+Cell[217647, 5078, 541, 9, 363, "Input"],
+Cell[218191, 5089, 2122, 44, 1331, "Input"],
+Cell[220316, 5135, 1279, 28, 1331, "Input"],
+Cell[221598, 5165, 247, 5, 382, "Input"],
+Cell[221848, 5172, 1093, 24, 1581, "Input"],
+Cell[222944, 5198, 461, 12, 625, "Input"],
+Cell[223408, 5212, 500, 7, 1088, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[223945, 5224, 145, 2, 1187, "Subsection"],
+Cell[224093, 5228, 693, 17, 2666, "Input"],
+Cell[224789, 5247, 41, 0, 790, "Input"],
+Cell[224833, 5249, 1061, 24, 2666, "Input"],
+Cell[225897, 5275, 41, 0, 790, "Input"],
+Cell[225941, 5277, 569, 10, 790, "Input"],
+Cell[226513, 5289, 198, 3, 790, "Input"],
+Cell[226714, 5294, 585, 11, 1932, "Text"],
+Cell[227302, 5307, 3190, 63, 3118, "Input"],
+Cell[230495, 5372, 1604, 37, 3118, "Input"],
+Cell[232102, 5411, 244, 5, 812, "Input"],
+Cell[232349, 5418, 910, 21, 3118, "Input"],
+Cell[233262, 5441, 339, 5, 1265, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[233638, 5451, 357, 6, 1187, "Subsection"],
+Cell[233998, 5459, 329, 7, 226918, "Text"],
+Cell[234330, 5468, 918, 21, 366072, "Input"],
+Cell[235251, 5491, 2254, 57, 684175, "Input"],
+Cell[237508, 5550, 1775, 37, 366072, "Input"],
+Cell[239286, 5589, 260, 6, 134252, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[239583, 5600, 187, 3, 937, "Subsection"],
+Cell[239773, 5605, 693, 17, 448606, "Input"],
+Cell[240469, 5624, 1076, 25, 448606, "Input"],
+Cell[241548, 5651, 603, 10, 134252, "Input"],
+Cell[242154, 5663, 215, 3, 134252, "Input"],
+Cell[242372, 5668, 585, 11, 316700, "Text"],
+Cell[242960, 5681, 3079, 59, 528441, "Input"],
+Cell[246042, 5742, 307, 6, 134252, "Input"],
+Cell[246352, 5750, 909, 22, 528441, "Input"],
+Cell[247264, 5774, 379, 6, 211133, "Input"]
 }, Closed]]
 }, Closed]]
 }
